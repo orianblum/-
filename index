@@ -1,0 +1,129 @@
+<!DOCTYPE html>
+<html lang="he">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>תוכנית פעילות בגן</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: Arial, sans-serif;
+            direction: rtl;
+            background-color: #f4f4f4;
+            padding: 20px;
+        }
+
+        .container {
+            max-width: 600px;
+            margin: 0 auto;
+            background-color: #fff;
+            padding: 20px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+        }
+
+        h1, h2 {
+            text-align: center;
+            color: #333;
+        }
+
+        form {
+            display: flex;
+            flex-direction: column;
+            gap: 15px;
+        }
+
+        label {
+            font-weight: bold;
+        }
+
+        input {
+            padding: 10px;
+            font-size: 1rem;
+            border: 1px solid #ddd;
+            border-radius: 5px;
+        }
+
+        button {
+            background-color: #4CAF50;
+            color: white;
+            padding: 10px;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+        }
+
+        button:hover {
+            background-color: #45a049;
+        }
+
+        #schedule {
+            margin-top: 20px;
+        }
+
+        .activity-item {
+            background-color: #e9f5e9;
+            padding: 10px;
+            margin-bottom: 10px;
+            border-radius: 5px;
+            border-left: 5px solid #4CAF50;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>תוכנית פעילות בגן</h1>
+        <form id="activityForm">
+            <label for="activityName">שם הפעילות:</label>
+            <input type="text" id="activityName" required>
+
+            <label for="activityDuration">משך הפעילות (בדקות):</label>
+            <input type="number" id="activityDuration" required>
+
+            <label for="ageGroup">גילאי הילדים (למשל, 3-4):</label>
+            <input type="text" id="ageGroup" required>
+
+            <button type="submit">הוסף פעילות</button>
+        </form>
+
+        <h2>לוח זמנים</h2>
+        <div id="schedule">
+            <!-- פעילויות יתווספו כאן -->
+        </div>
+    </div>
+
+    <script>
+        document.getElementById('activityForm').addEventListener('submit', function(event) {
+            event.preventDefault();
+
+            const activityName = document.getElementById('activityName').value;
+            const activityDuration = document.getElementById('activityDuration').value;
+            const ageGroup = document.getElementById('ageGroup').value;
+
+            if (activityName && activityDuration && ageGroup) {
+                const scheduleContainer = document.getElementById('schedule');
+
+                const activityItem = document.createElement('div');
+                activityItem.classList.add('activity-item');
+
+                activityItem.innerHTML = `
+                    <h3>${activityName}</h3>
+                    <p><strong>משך:</strong> ${activityDuration} דקות</p>
+                    <p><strong>גילאי ילדים:</strong> ${ageGroup}</p>
+                `;
+
+                scheduleContainer.appendChild(activityItem);
+
+                // לנקות את השדות לאחר ההגשה
+                document.getElementById('activityName').value = '';
+                document.getElementById('activityDuration').value = '';
+                document.getElementById('ageGroup').value = '';
+            }
+        });
+    </script>
+</body>
+</html>
